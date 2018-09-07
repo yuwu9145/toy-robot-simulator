@@ -2,11 +2,11 @@
   "name": "toy-robot-simulator",
   "version": "1.0.0",
   "description": "REA code challenge",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "./node_modules/mocha/bin/mocha src/**/*.test.js --compilers js:babel-core/register",
-    "test:coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha src/**/*.test.js -- --require babel-register"
+    "test": "./node_modules/.bin/_mocha --recursive tests --compilers js:babel-core/register",
+    "test:coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha tests tests/**/*.js -- --require babel-register"
   },
   "author": "anonymous",
   "license": "ISC",

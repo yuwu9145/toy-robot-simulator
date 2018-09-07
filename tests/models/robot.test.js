@@ -2,7 +2,7 @@
 
 import * as chai from 'chai';
 
-import { Robot } from './robot';
+import { Robot } from '../../src/models/robot';
 
 chai.should();
 
