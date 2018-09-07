@@ -1,14 +1,15 @@
 'use strict'
 
-const chai = require('chai');
-const path = require('path');
-const expect = chai.expect;
+import * as chai from 'chai';
+
+import { Robot } from './robot';
 
 chai.should();
 
-const Robot = require(path.join(__dirname, '.', 'robot'));
+const expect = chai.expect;
 
 describe('Class: Robot', () => {
+  
   describe('#x', () => {
     let robot;
 
@@ -79,7 +80,7 @@ describe('Class: Robot', () => {
       robot.f.should.equal('SOUTH');
     });
 
-    it('onlf accepts string values', () => {
+    it('only accepts string values', () => {
       // Assert that an error will be thrown if
       // the f it set to a non-string value.
       expect(() => robot.f = 1).to.throw('"f" must be a string.');

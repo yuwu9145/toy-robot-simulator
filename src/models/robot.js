@@ -1,4 +1,4 @@
-class Robot {
+export class Robot {
   
   constructor(x, y, f) {
     this.x = x;
@@ -43,5 +43,3 @@ class Robot {
   }
 
 }
-
-module.exports = Robot;
