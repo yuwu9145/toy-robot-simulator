@@ -4,14 +4,16 @@
   "description": "REA code challenge",
   "main": "src/index.js",
   "scripts": {
-    "start":  "node src/index.js",
-    "test": "./node_modules/mocha/bin/mocha src/**/*.test.js"
+    "start": "node src/index.js",
+    "test": "./node_modules/mocha/bin/mocha src/**/*.test.js",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha src/**/*.test.js"
   },
   "author": "anonymous",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0"
   }
 }
