@@ -1,5 +1,7 @@
 {
   "name": "toy-robot-simulator",
+  "preferGlobal": true,
+  "bin": "./dist/bundle.js",
   "version": "1.0.0",
   "description": "REA code challenge",
   "main": "src/app.js",
@@ -8,7 +10,8 @@
     "prestart": "npm run build",
     "start": "npm run dev",
     "build": "./node_modules/.bin/webpack",
-    "start:production": "NODE_ENV=production babel-node --presets es2015 src/app.js",
+    "production": "npm run build && npm link",
+    "uninstallApp": "npm unlink --no-save toy-robot-simulator && npm unlink",
     "test": "NODE_ENV=testing ./node_modules/.bin/_mocha --recursive tests --compilers js:babel-core/register",
     "test:e2e": "npm run build && ./node_modules/.bin/_mocha e2e.test.js --compilers js:babel-core/register",
     "test:coverage": "NODE_ENV=testing ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha tests tests/**/*.js -- --require babel-register"
