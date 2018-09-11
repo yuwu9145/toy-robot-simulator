@@ -58,5 +58,21 @@
   {
     "commandSequence": ["PLACE 0,0,EAST","MOVE","MOVE","LEFT","MOVE","REPORT","REPORT"],
     "expected": "2,1,NORTH\n2,1,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 0,1,SOUTH","MOVE","LEFT","MOVE","RIGHT","MOVE","LEFT","MOVE","RIGHT","MOVE","LEFT","MOVE","RIGHT","MOVE","LEFT","MOVE","REPORT"],
+    "expected": "4,0,EAST"
+  },
+  {
+    "commandSequence": ["PLACE 5,4,SOUTH","MOVE","REPORT"],
+    "expected": ""
+  },
+  {
+    "commandSequence": ["PLACE 2,2,NORTH","MOVE","PLACE -1,-1,NORTH","RIGHT","MOVE","LEFT","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "3,4,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,NORTH","INVALID_COMMAND","MOVE","REPORT"],
+    "expected": "invalid command\n0,1,NORTH"
   }
 ]

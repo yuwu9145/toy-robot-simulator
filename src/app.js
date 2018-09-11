@@ -33,7 +33,9 @@ export const runCommand = (command, robot) => {
     const placeArgs = helpers.getArgsFromPlaceCommand(command);
     if (placeArgs) {
       commands.place(placeArgs.x,placeArgs.y,placeArgs.f,robot);
-      placeExecuted = true;
+      if(helpers.positionCheck(robot)) {
+        placeExecuted = true;
+      }
     } else {
       throw new Error(constants.INVALID_COMMAND_ERROR);
     }
@@ -52,9 +54,6 @@ export const runCommand = (command, robot) => {
   }
 
   if (placeExecuted && !helpers.positionCheck(robot)) {
-    if (command.includes(constants.COMMAND_PLACE)) {
-      placeExecuted = false;
-    }
     return rollBackRobot;
   } else {
     return robot;
@@ -65,12 +64,22 @@ export const runCommand = (command, robot) => {
  * 
  * @param {array} commands in sequence 
  */
-export const run = (commands) => commands.forEach(command => robot = runCommand(command, robot));
+export const run = (commands) => commands.forEach(command => {
+  try {
+    robot = runCommand(command, robot)
+  } catch(e) {
+    console.log(constants.INVALID_COMMAND_ERROR);
+  }
+});
 
 const readCommandsExcute = (filePath, robot) => {
   const content = fs.readFileSync(filePath, 'utf8');
-  const commandsToExcute = JSON.parse(content);
-  run(commandsToExcute, robot);
+  try {
+    const commandsToExcute = JSON.parse(content);
+    run(commandsToExcute, robot);
+  } catch (e) {
+    console.log(constants.INVALID_FILE_INPUT_ERROR);
+  }
 }
 
 if (process.env.NODE_ENV !== 'testing') {
