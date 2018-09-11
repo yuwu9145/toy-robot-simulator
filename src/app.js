@@ -64,16 +64,18 @@ export const runCommand = (command, robot) => {
  */
 export const run = (commands) => commands.forEach(command => runCommand(command, robot));
 
-if (process.env.NODE_ENV === 'production') {
-  // production mode
-  // const content = fs.readFileSync(`${__dirname}/../tests/testData.json`, 'utf8');
-  // const contentInJson = JSON.parse(content);
-  // console.log(contentInJson);
-} else if(process.env.NODE_ENV === 'development') {
-  // development mode
-  const content = fs.readFileSync(constants.COMMAND_INPUT_FILE, 'utf8');
+const readCommandsExcute = (filePath) => {
+  const content = fs.readFileSync(filePath, 'utf8');
   const commandsToExcute = JSON.parse(content);
   run(commandsToExcute);
-} else {
-  
 }
+
+if (process.env.NODE_ENV !== 'testing') {
+  if (process.argv[2]) {
+    readCommandsExcute(process.argv[2]);
+  } else {
+    console.log(`Invalid file: ${process.argv[2]} has been provided.`);
+  }
+}
+
+

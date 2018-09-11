@@ -9,12 +9,12 @@ chai.should();
 const expect = chai.expect;
 
 const TEST_DATA_FILE = `${__dirname}/testData.e2e.json`;
-const APP_INPUT_DATA_FILE = `${__dirname}/src/input.txt`;
+const APP_INPUT_DATA_FILE = `${__dirname}/input.txt`;
 
 function executeRunCommand(expected) {
   return new Promise(resolve => {
     nixt()
-    .run('npm run --silent start')
+    .run('npm run --silent dev')
     .stdout(expected)
     .end(err => resolve(err));
   });
@@ -31,6 +31,7 @@ describe('Run application with test data', () => {
     const testCases = JSON.parse(fileContent);
     
     for(const testCase of testCases) {
+      console.log(`=============checking commands: [${testCase.commandSequence}] ===========`);
       const commandsToExcute = testCase.commandSequence;
       // write test command to app input data file
       fs.writeFileSync(APP_INPUT_DATA_FILE, JSON.stringify(commandsToExcute));
