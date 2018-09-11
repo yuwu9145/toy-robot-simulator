@@ -1,0 +1,14 @@
+[
+  {
+    "commandSequence": ["PLACE 0,0,NORTH","MOVE","REPORT"],
+    "expected": "0,1,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,NORTH","LEFT","REPORT"],
+    "expected": "0,0,WEST"
+  },
+  {
+    "commandSequence": ["PLACE 1,2,EAST","MOVE","MOVE","LEFT","MOVE","REPORT"],
+    "expected": "3,3,NORTH"
+  }
+]

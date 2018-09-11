@@ -1,3 +1,6 @@
+export const INVALID_COMMAND_ERROR = 'invalid command';
+export const COMMAND_INPUT_FILE = `${__dirname}/input.txt`;
+
 export const TABLE_WIDTH = 5;
 export const TABLE_HEIGHT = 5;
 

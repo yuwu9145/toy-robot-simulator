@@ -1,3 +1,7 @@
+'use strict';
+
+import * as fs from 'fs';
+
 import {Robot} from './models/robot';
 import * as constants from './constants';
 import * as commands from './commands';
@@ -20,10 +24,8 @@ export const runCommand = (command, robot) => {
   const rollBackRobot = Object.assign({}, robot);
   Object.setPrototypeOf(rollBackRobot, Robot.prototype);
 
-  const errorMessage = 'invalid command';
-
   if (!helpers.isCommandInvalid(command)) {
-    throw new Error(errorMessage);
+    throw new Error(constants.INVALID_COMMAND_ERROR);
   }
 
   if(command.includes(constants.COMMAND_PLACE)) {
@@ -33,7 +35,7 @@ export const runCommand = (command, robot) => {
       commands.place(placeArgs.x,placeArgs.y,placeArgs.f,robot);
       placeExecuted = true;
     } else {
-      throw new Error(errorMessage);
+      throw new Error(constants.INVALID_COMMAND_ERROR);
     }
   } else if(command === constants.COMMAND_MOVE && placeExecuted) {
     // MOVE command
@@ -49,10 +51,29 @@ export const runCommand = (command, robot) => {
     console.log(commands.report(robot));
   }
 
-  if (!helpers.positionCheck(robot)) {
+  if (placeExecuted && !helpers.positionCheck(robot)) {
     return rollBackRobot;
   } else {
     return robot;
   }
+}
+
+/**
+ * 
+ * @param {array} commands in sequence 
+ */
+export const run = (commands) => commands.forEach(command => runCommand(command, robot));
+
+if (process.env.NODE_ENV === 'production') {
+  // production mode
+  // const content = fs.readFileSync(`${__dirname}/../tests/testData.json`, 'utf8');
+  // const contentInJson = JSON.parse(content);
+  // console.log(contentInJson);
+} else if(process.env.NODE_ENV === 'development') {
+  // development mode
+  const content = fs.readFileSync(constants.COMMAND_INPUT_FILE, 'utf8');
+  const commandsToExcute = JSON.parse(content);
+  run(commandsToExcute);
+} else {
   
 }
