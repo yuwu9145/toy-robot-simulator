@@ -1,11 +1,11 @@
 'use strict'
 
 import * as chai from 'chai';
+import * as sinon from 'sinon';
+const assert = require('assert');
 
-import {runCommand} from '../src/app';
-
-import {Robot} from '../src/models/robot';
-
+import { runCommand } from '../src/app';
+import { Robot } from '../src/models/robot';
 import * as constants from '../src/constants';
 
 chai.should();
@@ -73,6 +73,18 @@ describe('App', () => {
       robot.x.should.equal(0);
       robot.y.should.equal(0);
       robot.f.should.equal('EAST');
+    });
+
+    it('print robot location and direction in console', () => {
+
+      const spy = sinon.spy(console, 'log');
+
+      robot = runCommand('REPORT', robot);
+      robot.x.should.equal(0);
+      robot.y.should.equal(0);
+      robot.f.should.equal('NORTH');
+      assert(spy.calledWith('0,0,NORTH'));
+      spy.restore();
     });
 
     it('cannot move robot when robot is on top of the table and face NORTH', () => {

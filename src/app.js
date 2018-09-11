@@ -46,7 +46,7 @@ export const runCommand = (command, robot) => {
     commands.right(robot);
   } else if(command === constants.COMMAND_REPORT && placeExecuted) {
     // REPORT command
-    commands.report(robot);
+    console.log(commands.report(robot));
   }
 
   if (!helpers.positionCheck(robot)) {

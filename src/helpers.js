@@ -3,9 +3,7 @@
 import * as constants from './constants';
 
 /**
- * 
  * check robot position is outside table
- * 
  * @param {*} robot 
  * @returns {boolean}
  */
