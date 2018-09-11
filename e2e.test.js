@@ -24,7 +24,7 @@ function executeRunCommand(expected) {
 describe('Run application with test data', () => {
 
   it('should run each command sequence and check compare with expected output', async function () {
-    this.timeout(5000);
+    this.timeout(50000);
 
     // get test data from json file
     const fileContent = fs.readFileSync(TEST_DATA_FILE, 'utf8');

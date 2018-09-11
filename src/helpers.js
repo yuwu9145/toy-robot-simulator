@@ -9,9 +9,9 @@ import * as constants from './constants';
  */
 export const positionCheck = (robot) => 
   (robot.x + 1) > 0 
-  && (robot.x + 1) < constants.TABLE_WIDTH 
+  && (robot.x) < constants.TABLE_WIDTH 
   && (robot.y + 1) > 0 
-  && (robot.y + 1 < constants.TABLE_HEIGHT)
+  && (robot.y < constants.TABLE_HEIGHT)
 
 /**
  * 

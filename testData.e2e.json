@@ -4,11 +4,59 @@
     "expected": "0,1,NORTH"
   },
   {
+    "commandSequence": ["PLACE 0,0,NORTH","MOVE","MOVE","MOVE","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "0,4,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,EAST","MOVE","MOVE","MOVE","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "4,0,EAST"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,SOUTH","MOVE","MOVE","MOVE","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "0,0,SOUTH"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,WEST","MOVE","MOVE","MOVE","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "0,0,WEST"
+  },
+  {
+    "commandSequence": ["PLACE 0,0,NORTH","MOVE","RIGHT","MOVE","LEFT","MOVE","RIGHT","MOVE","LEFT","REPORT"],
+    "expected": "2,2,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 2,2,NORTH","MOVE","RIGHT","MOVE","LEFT","MOVE","REPORT"],
+    "expected": "3,4,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 2,2,NORTH","MOVE","RIGHT","MOVE","LEFT","MOVE","PLACE 0,0,NORTH","REPORT"],
+    "expected": "0,0,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE -1,-1,NORTH","MOVE","RIGHT","MOVE","LEFT","MOVE","PLACE 0,0,NORTH","REPORT"],
+    "expected": "0,0,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE -1,-1,NORTH","MOVE","RIGHT","MOVE","LEFT","MOVE","PLACE 0,0,NORTH","MOVE","REPORT"],
+    "expected": "0,1,NORTH"
+  },
+  {
     "commandSequence": ["PLACE 0,0,NORTH","LEFT","REPORT"],
     "expected": "0,0,WEST"
   },
   {
     "commandSequence": ["PLACE 1,2,EAST","MOVE","MOVE","LEFT","MOVE","REPORT"],
     "expected": "3,3,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 5,5,EAST","MOVE","MOVE","LEFT","MOVE","REPORT"],
+    "expected": ""
+  },
+  {
+    "commandSequence": ["PLACE -1,-1,EAST","MOVE","MOVE","LEFT","MOVE","REPORT"],
+    "expected": ""
+  },
+  {
+    "commandSequence": ["PLACE 0,0,EAST","MOVE","MOVE","LEFT","MOVE","REPORT","REPORT"],
+    "expected": "2,1,NORTH\n2,1,NORTH"
   }
 ]

@@ -52,6 +52,9 @@ export const runCommand = (command, robot) => {
   }
 
   if (placeExecuted && !helpers.positionCheck(robot)) {
+    if (command.includes(constants.COMMAND_PLACE)) {
+      placeExecuted = false;
+    }
     return rollBackRobot;
   } else {
     return robot;
@@ -62,17 +65,17 @@ export const runCommand = (command, robot) => {
  * 
  * @param {array} commands in sequence 
  */
-export const run = (commands) => commands.forEach(command => runCommand(command, robot));
+export const run = (commands) => commands.forEach(command => robot = runCommand(command, robot));
 
-const readCommandsExcute = (filePath) => {
+const readCommandsExcute = (filePath, robot) => {
   const content = fs.readFileSync(filePath, 'utf8');
   const commandsToExcute = JSON.parse(content);
-  run(commandsToExcute);
+  run(commandsToExcute, robot);
 }
 
 if (process.env.NODE_ENV !== 'testing') {
   if (process.argv[2]) {
-    readCommandsExcute(process.argv[2]);
+    readCommandsExcute(process.argv[2],robot);
   } else {
     console.log(`Invalid file: ${process.argv[2]} has been provided.`);
   }
