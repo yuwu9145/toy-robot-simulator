@@ -135,11 +135,11 @@ Lines        : 97.76% ( 131/134 )
 ### test data
 
 
-Test data is defined in `testData.e2e.json`. 
-
+Test data is defined in `testData.e2e.json`.
 
 It defines many test command sequences with their corresponding expected output.
 
+This is part of the file content:
 
 ```json
 [
