@@ -1,14 +1,20 @@
 # REA toy robot simulator
 
+
 A command line application built with nodejs. The application input is defined in an input file. Details about how to use input file can be found in `Input file format` section.
+
 
 ## Environment
 
+
 Node 10
+
 
 ## Installing
 
+
 In project root directory, install all node modules
+
 
 ```bash
 [project_root_directory]$ npm i
@@ -16,13 +22,17 @@ In project root directory, install all node modules
 
 ## Development mode
 
+
 In project root directory, run:
+
 
 ```bash
 [project_root_directory]$ npm start
 ```
 
+
 The command will compile source code to a bundle file with `webpack` and run the app with `input.txt` as input file which can be found in project root directory.
+
 
 ## Production (independent command in terminal)
 
@@ -48,21 +58,27 @@ $ toy-robot-simulator ./input.txt
 
 ### uninstall
 
+
 To uninstall the command from your terminal, run:
+
 
 ```bash
 [project_root_directory]$ npm run uninstallApp
 ```
 
+
 ## Input file format
 
+
 Input file content is an array which keeps commands in sequence:
+
 
 ```bash
 ["PLACE 0,0,NORTH","MOVE","REPORT"]
 ```
 
 Then command sequence will be
+
 
 ```bash
 PLACE 0,0,NORTH
@@ -77,6 +93,7 @@ Output
 ```
 
 Feel free to modify `[project_root_directory]/input.txt` and run `npm start` to test the application in development mode.
+
 
 ## Testing
 
@@ -104,6 +121,7 @@ After run above command, test coverage report will be visible by opening followi
 
 Test coverage report in commandline:
 
+
 ```bash
 =============================== Coverage summary ===============================
 Statements   : 97.83% ( 135/138 )
@@ -113,11 +131,15 @@ Lines        : 97.76% ( 131/134 )
 ================================================================================
 ```
 
+
 ### test data
+
 
 Test data is defined in `testData.e2e.json`. 
 
+
 It defines many test command sequences with their corresponding expected output.
+
 
 ```json
 [
@@ -135,13 +157,15 @@ It defines many test command sequences with their corresponding expected output.
 
 ### end to end tests
 
+
 End to end testing will run against development enviornment. Run
 
 ```bash
 [project_root_directory]$ npm run test:e2e
 ```
 
-End to end testing will read this file, for each test case, it will override command sequence to `input.txt`, run against `npm start`, and check each outcome against with expected output defined in `testData.e2e.json`.
+End to end testing will read `testData.e2e.json`, for each test case, it will the command sequence to `input.txt`, run `npm start`, and check each console output against expected output defined in `testData.e2e.json`.
+
 
 
 ## Built With
@@ -152,6 +176,8 @@ End to end testing will read this file, for each test case, it will override com
 * [Chai](http://www.chaijs.com/) - BDD/TDD assert library
 * [istanbul](https://github.com/istanbuljs) - Code coverage report tool
 
+
 ## Acknowledgments
 
 * All copy rights reserved
+
