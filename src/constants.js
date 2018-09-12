@@ -1,4 +1,4 @@
-export const INVALID_COMMAND_ERROR = 'nvalid command';
+export const INVALID_COMMAND_ERROR = 'invalid command';
 export const INVALID_FILE_INPUT_ERROR = 'invalid file input, sample input file content format: ["PLACE 0,0,NORTH","MOVE","REPORT"]';
 export const COMMAND_INPUT_FILE = `${__dirname}/input.txt`;
 

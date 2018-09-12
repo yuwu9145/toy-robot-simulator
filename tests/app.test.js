@@ -1,11 +1,14 @@
 'use strict'
 
+const fs = require('fs');
+
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 const assert = require('assert');
 
-import { runCommand } from '../src/app';
+import { runCommand, readCommandsExecute, run } from '../src/app';
 import { Robot } from '../src/models/robot';
+import * as helpers from '../src/helpers';
 import * as constants from '../src/constants';
 
 chai.should();
@@ -155,7 +158,79 @@ describe('App', () => {
     });
 
     it('ignore any other commands and throw error', () => {
-      expect(() => runCommand('AAAAAA', robot)).to.throw('invalid command');
+      expect(() => runCommand('AAAAAA', robot)).to.throw(constants.INVALID_COMMAND_ERROR);
+    });
+
+    it('prints out invalid command message', () => {
+      sinon.stub(helpers,'getArgsFromPlaceCommand').onFirstCall().returns(undefined);
+      expect(() => runCommand('PLACE -1,0,NORTH', robot)).to.throw(constants.INVALID_COMMAND_ERROR);
+      helpers.getArgsFromPlaceCommand.restore();
+    });
+
+  });
+
+  describe('Function: run', () => {
+
+    let consoleSpy;
+
+    beforeEach(() => {
+      consoleSpy = sinon.spy(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleSpy.restore();
+    })
+
+    it('executes all commands', () => {
+      const commands = ["PLACE 0,0,NORTH","MOVE","REPORT"];
+      run(commands);
+      assert(consoleSpy.calledWith('0,1,NORTH'));
+    });
+
+    it('prints out invalid command message', () => {
+      const commands = ["INVALID_COMMAND","MOVE","REPORT"];
+      run(commands);
+      assert(consoleSpy.calledWith(constants.INVALID_COMMAND_ERROR));
+    });
+
+  });
+
+  describe('Function: readCommandsExecute', () => {
+
+    let fullPath = '';
+    let robot;
+    let consoleSpy;
+
+    beforeEach(() => {
+      // create a robot
+      robot = new Robot(0,0,'NORTH');
+      
+      fullPath = 'foo.js';
+      consoleSpy = sinon.spy(console, 'log');
+
+      sinon.stub(fs,'readFileSync')
+      .withArgs(fullPath, 'utf8')
+      .onFirstCall()
+      .returns(`["PLACE 0,0,NORTH","MOVE","REPORT"]`);
+    });
+
+    afterEach(() => {
+      fs.readFileSync.restore();
+      consoleSpy.restore();
+    })
+
+    it('read command sequence and call run function', () => {
+
+      readCommandsExecute(fullPath,robot);
+      assert(consoleSpy.calledWith('0,1,NORTH'));
+    });
+
+    it('print error message when input file content is invalid', () => {
+      
+      sinon.stub(JSON,'parse').withArgs(`["PLACE 0,0,NORTH","MOVE","T"]`).onFirstCall().throws('Invlid JSON');
+      readCommandsExecute(fullPath,robot);
+      assert(consoleSpy.calledWith(constants.INVALID_FILE_INPUT_ERROR));
+      JSON.parse.restore();
     });
 
   });

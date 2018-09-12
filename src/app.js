@@ -1,6 +1,6 @@
 'use strict';
 
-import * as fs from 'fs';
+const fs = require('fs');
 
 import {Robot} from './models/robot';
 import * as constants from './constants';
@@ -61,7 +61,7 @@ export const runCommand = (command, robot) => {
 }
 
 /**
- * 
+ * Run each command
  * @param {array} commands in sequence 
  */
 export const run = (commands) => commands.forEach(command => {
@@ -72,7 +72,12 @@ export const run = (commands) => commands.forEach(command => {
   }
 });
 
-const readCommandsExcute = (filePath, robot) => {
+/**
+ * Read command sequence from file and execute each command
+ * @param {*} filePath 
+ * @param {*} robot 
+ */
+export const readCommandsExecute = (filePath, robot) => {
   const content = fs.readFileSync(filePath, 'utf8');
   try {
     const commandsToExcute = JSON.parse(content);
@@ -84,7 +89,7 @@ const readCommandsExcute = (filePath, robot) => {
 
 if (process.env.NODE_ENV !== 'testing') {
   if (process.argv[2]) {
-    readCommandsExcute(process.argv[2],robot);
+    readCommandsExecute(process.argv[2],robot);
   } else {
     console.log(`Invalid file: ${process.argv[2]} has been provided.`);
   }
