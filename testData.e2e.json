@@ -68,11 +68,11 @@
     "expected": ""
   },
   {
-    "commandSequence": ["PLACE 2,2,NORTH","MOVE","PLACE -1,-1,NORTH","RIGHT","MOVE","LEFT","MOVE","MOVE","MOVE","REPORT"],
-    "expected": "3,4,NORTH"
-  },
-  {
     "commandSequence": ["PLACE 0,0,NORTH","INVALID_COMMAND","MOVE","REPORT"],
     "expected": "invalid command\n0,1,NORTH"
+  },
+  {
+    "commandSequence": ["PLACE 2,2,NORTH","MOVE","PLACE -1,-1,NORTH","RIGHT","MOVE","LEFT","MOVE","MOVE","MOVE","REPORT"],
+    "expected": "3,4,NORTH"
   }
 ]
